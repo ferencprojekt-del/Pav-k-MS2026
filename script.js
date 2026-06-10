@@ -13,39 +13,52 @@ const groups = {
   L: ["Škótsko", "Ukrajina", "Maroko", "Čína"]
 };
 
-const groupsDiv = document.getElementById('groups');
+const groupsDiv = document.getElementById("groups");
+const r32Div = document.getElementById("r32");
 
 function createGroupUI() {
   Object.entries(groups).forEach(([name, teams]) => {
-    const div = document.createElement('div');
-    div.className = 'group';
-    div.innerHTML = `<h2>Skupina ${name}</h2>`;
+    const card = document.createElement("div");
+    card.className = "group-card";
+
+    const header = document.createElement("div");
+    header.className = "group-header";
+    header.innerHTML = `<h3>Skupina ${name}</h3><span class="group-tag">4 tímy</span>`;
+    card.appendChild(header);
+
     teams.forEach(team => {
-      const row = document.createElement('div');
-      row.className = 'team-row';
-      const label = document.createElement('span');
+      const row = document.createElement("div");
+      row.className = "team-row";
+
+      const label = document.createElement("div");
+      label.className = "team-name";
       label.textContent = team;
-      const select = document.createElement('select');
+
+      const select = document.createElement("select");
+      select.className = "team-select";
       select.dataset.group = name;
       select.dataset.team = team;
+
       for (let i = 1; i <= 4; i++) {
-        const opt = document.createElement('option');
+        const opt = document.createElement("option");
         opt.value = i;
         opt.textContent = `${i}. miesto`;
         select.appendChild(opt);
       }
+
       row.appendChild(label);
       row.appendChild(select);
-      div.appendChild(row);
+      card.appendChild(row);
     });
-    groupsDiv.appendChild(div);
+
+    groupsDiv.appendChild(card);
   });
 }
 
 createGroupUI();
 
-document.getElementById('generate').addEventListener('click', () => {
-  const selects = document.querySelectorAll('select');
+document.getElementById("generate").addEventListener("click", () => {
+  const selects = document.querySelectorAll(".team-select");
   const standings = {};
 
   selects.forEach(sel => {
@@ -65,23 +78,61 @@ document.getElementById('generate').addEventListener('click', () => {
   const thirds = [];
 
   Object.entries(standings).forEach(([g, arr]) => {
-    firsts.push(arr[0].team);
-    seconds.push(arr[1].team);
-    thirds.push(arr[2].team);
+    firsts.push({ group: g, team: arr[0].team });
+    seconds.push({ group: g, team: arr[1].team });
+    thirds.push({ group: g, team: arr[2].team });
   });
 
+  thirds.sort((a, b) => a.group.localeCompare(b.group));
   const bestThirds = thirds.slice(0, 8);
 
-  const roundOf32 = [];
-  function pair(a, b) { roundOf32.push(`${a} vs ${b}`); }
+  const fTeams = firsts.map(x => x.team);
+  const sTeams = seconds.map(x => x.team);
+  const tTeams = bestThirds.map(x => x.team);
 
-  for (let i = 0; i < firsts.length; i++) {
-    const opp = bestThirds[i] || seconds[i];
-    pair(firsts[i], opp);
+  const matches32 = [];
+  function pair(a, b, idx) {
+    matches32.push({ id: idx, home: a, away: b });
   }
 
-  const bracketEl = document.getElementById('bracket');
-  bracketEl.textContent =
-    '32-finále:\n' +
-    roundOf32.map((m, i) => `${i + 1}. ${m}`).join('\n');
+  for (let i = 0; i < fTeams.length; i++) {
+    const opp = tTeams[i] || sTeams[i];
+    pair(fTeams[i], opp, i + 1);
+  }
+
+  const usedSeconds = fTeams.length;
+  let matchIndex = fTeams.length + 1;
+  for (let i = usedSeconds; i < sTeams.length; i += 2) {
+    if (sTeams[i + 1]) {
+      pair(sTeams[i], sTeams[i + 1], matchIndex++);
+    }
+  }
+
+  renderRoundOf32(matches32);
 });
+
+function renderRoundOf32(matches) {
+  r32Div.innerHTML = "";
+  matches.forEach(m => {
+    const card = document.createElement("div");
+    card.className = "match-card";
+
+    const header = document.createElement("div");
+    header.className = "match-header";
+    header.innerHTML = `<span>32-finále #${m.id}</span><span>Tipni víťaza v hlave 😉</span>`;
+    card.appendChild(header);
+
+    const line1 = document.createElement("div");
+    line1.className = "team-line";
+    line1.innerHTML = `<span class="team-label">${m.home}</span><span class="team-slot">?</span>`;
+
+    const line2 = document.createElement("div");
+    line2.className = "team-line";
+    line2.innerHTML = `<span class="team-label">${m.away}</span><span class="team-slot">?</span>`;
+
+    card.appendChild(line1);
+    card.appendChild(line2);
+
+    r32Div.appendChild(card);
+  });
+}
