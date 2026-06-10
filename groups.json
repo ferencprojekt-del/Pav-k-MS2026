@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "group": "A",
+    "home": { "team": "Nemecko", "flag": "https://flagcdn.com/w20/de.png" },
+    "away": { "team": "Brazília", "flag": "https://flagcdn.com/w20/br.png" }
+  },
+  {
+    "id": 2,
+    "group": "A",
+    "home": { "team": "USA", "flag": "https://flagcdn.com/w20/us.png" },
+    "away": { "team": "Slovensko", "flag": "https://flagcdn.com/w20/sk.png" }
+  }
+]
