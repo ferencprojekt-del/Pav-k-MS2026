@@ -1,5 +1,58 @@
 body {
   font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.group-title {
+  font-size: 22px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.match {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 200px;
+}
+
+.team img {
+  width: 26px;
+  height: 18px;
+  border: 1px solid #aaa;
+}
+
+.options button {
+  padding: 6px 14px;
+  margin-right: 6px;
+  cursor: pointer;
+  border: 1px solid #aaa;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.options button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+body {
+  font-family: Arial, sans-serif;
   max-width: 800px;
   margin: 20px auto;
 }
