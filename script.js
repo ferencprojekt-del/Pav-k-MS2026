@@ -1,125 +1,87 @@
-let tips = {};
+const groups = {
+  A: ["USA", "Brazília", "Kolumbia", "Nový Zéland"],
+  B: ["Mexiko", "Holandsko", "Ekvádor", "Japonsko"],
+  C: ["Kanada", "Francúzsko", "Nigéria", "Bolívia"],
+  D: ["Argentína", "Chorvátsko", "Irán", "Kostarika"],
+  E: ["Španielsko", "Švédsko", "Paraguaj", "Južná Kórea"],
+  F: ["Anglicko", "Uruguaj", "Tunisko", "Honduras"],
+  G: ["Nemecko", "Švajčiarsko", "Kamerun", "Katar"],
+  H: ["Portugalsko", "Turecko", "Ghana", "Panama"],
+  I: ["Taliansko", "Čile", "Kanada B", "Saudská Arábia"],
+  J: ["Belgicko", "USA B", "Egypt", "Venezuela"],
+  K: ["Dánsko", "Srbsko", "Mali", "Austrália"],
+  L: ["Škótsko", "Ukrajina", "Maroko", "Čína"]
+};
 
-async function loadMatches() {
-  const res = await fetch('matches.json');
-  const matches = await res.json();
+const groupsDiv = document.getElementById('groups');
 
-  const container = document.getElementById('matches');
-
-  const saved = localStorage.getItem('tips');
-  if (saved) tips = JSON.parse(saved);
-
-  let currentGroup = "";
-
-  matches.forEach(match => {
-
-    if (match.group !== currentGroup) {
-      currentGroup = match.group;
-      const title = document.createElement('div');
-      title.className = 'group-title';
-      title.textContent = `Skupina ${currentGroup}`;
-      container.appendChild(title);
-    }
-
-    const row = document.createElement('div');
-    row.className = 'match';
-
-    const home = document.createElement('div');
-    home.className = 'team';
-    home.innerHTML = `<img src="${match.home.flag}"> ${match.home.team}`;
-
-    const away = document.createElement('div');
-    away.className = 'team';
-    away.innerHTML = `<img src="${match.away.flag}"> ${match.away.team}`;
-
-    const opts = document.createElement('div');
-    opts.className = 'options';
-
-    ['1', 'X', '2'].forEach(opt => {
-      const btn = document.createElement('button');
-      btn.textContent = opt;
-
-      if (tips[match.id] === opt) btn.classList.add('active');
-
-      btn.addEventListener('click', () => {
-        tips[match.id] = opt;
-        localStorage.setItem('tips', JSON.stringify(tips));
-        [...opts.children].forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      });
-
-      opts.appendChild(btn);
+function createGroupUI() {
+  Object.entries(groups).forEach(([name, teams]) => {
+    const div = document.createElement('div');
+    div.className = 'group';
+    div.innerHTML = `<h2>Skupina ${name}</h2>`;
+    teams.forEach(team => {
+      const row = document.createElement('div');
+      row.className = 'team-row';
+      const label = document.createElement('span');
+      label.textContent = team;
+      const select = document.createElement('select');
+      select.dataset.group = name;
+      select.dataset.team = team;
+      for (let i = 1; i <= 4; i++) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = `${i}. miesto`;
+        select.appendChild(opt);
+      }
+      row.appendChild(label);
+      row.appendChild(select);
+      div.appendChild(row);
     });
-
-    row.appendChild(home);
-    row.appendChild(document.createTextNode("vs."));
-    row.appendChild(away);
-    row.appendChild(opts);
-
-    container.appendChild(row);
+    groupsDiv.appendChild(div);
   });
 }
 
-loadMatches();
-let tips = {};
+createGroupUI();
 
-async function loadMatches() {
-  const res = await fetch('matches.json');
-  const matches = await res.json();
+document.getElementById('generate').addEventListener('click', () => {
+  const selects = document.querySelectorAll('select');
+  const standings = {};
 
-  const container = document.getElementById('matches');
+  selects.forEach(sel => {
+    const g = sel.dataset.group;
+    const t = sel.dataset.team;
+    const pos = parseInt(sel.value, 10);
+    if (!standings[g]) standings[g] = [];
+    standings[g].push({ team: t, pos });
+  });
 
-  // načítaj uložené tipy z localStorage
-  const saved = localStorage.getItem('tips');
-  if (saved) {
-    tips = JSON.parse(saved);
+  Object.keys(standings).forEach(g => {
+    standings[g].sort((a, b) => a.pos - b.pos);
+  });
+
+  const firsts = [];
+  const seconds = [];
+  const thirds = [];
+
+  Object.entries(standings).forEach(([g, arr]) => {
+    firsts.push(arr[0].team);
+    seconds.push(arr[1].team);
+    thirds.push(arr[2].team);
+  });
+
+  const bestThirds = thirds.slice(0, 8);
+
+  const roundOf32 = [];
+  function pair(a, b) { roundOf32.push(`${a} vs ${b}`); }
+
+  for (let i = 0; i < firsts.length; i++) {
+    const opp = bestThirds[i] || seconds[i];
+    pair(firsts[i], opp);
   }
 
-  matches.forEach(match => {
-    const row = document.createElement('div');
-    row.className = 'match';
-
-    const label = document.createElement('span');
-    label.textContent = `${match.stage}: ${match.home} - ${match.away}`;
-    row.appendChild(label);
-
-    const homeInput = document.createElement('input');
-    homeInput.type = 'number';
-    homeInput.min = 0;
-    homeInput.value = tips[match.id]?.home ?? '';
-    row.appendChild(homeInput);
-
-    const sep = document.createElement('span');
-    sep.textContent = ':';
-    row.appendChild(sep);
-
-    const awayInput = document.createElement('input');
-    awayInput.type = 'number';
-    awayInput.min = 0;
-    awayInput.value = tips[match.id]?.away ?? '';
-    row.appendChild(awayInput);
-
-    homeInput.addEventListener('input', () => {
-      saveToMemory(match.id, homeInput.value, awayInput.value);
-    });
-
-    awayInput.addEventListener('input', () => {
-      saveToMemory(match.id, homeInput.value, awayInput.value);
-    });
-
-    container.appendChild(row);
-  });
-}
-
-function saveToMemory(id, home, away) {
-  tips[id] = { home, away };
-}
-
-function saveToLocalStorage() {
-  localStorage.setItem('tips', JSON.stringify(tips));
-  alert('Tipy uložené v tomto prehliadači.');
-}
-
-document.getElementById('save').addEventListener('click', saveToLocalStorage);
-
-loadMatches();
+  const bracketEl = document.getElementById('bracket');
+  bracketEl.textContent =
+    '32-finále:\n' +
+    roundOf32.map((m, i) => `${i + 1}. ${m}`).join('\n');
+});
