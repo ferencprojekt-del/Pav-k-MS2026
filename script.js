@@ -21,6 +21,7 @@ const r8Div = document.getElementById("r8");
 const r4Div = document.getElementById("r4");
 const r2Div = document.getElementById("r2");
 const winnerDiv = document.getElementById("winner");
+const errorEl = document.getElementById("error");
 
 // --- Vykreslenie skupín ---
 function createGroupUI() {
@@ -46,6 +47,11 @@ function createGroupUI() {
       select.dataset.group = name;
       select.dataset.team = team;
 
+      const emptyOpt = document.createElement("option");
+      emptyOpt.value = "";
+      emptyOpt.textContent = "-";
+      select.appendChild(emptyOpt);
+
       for (let i = 1; i <= 4; i++) {
         const opt = document.createElement("option");
         opt.value = i;
@@ -60,23 +66,66 @@ function createGroupUI() {
 
     groupsDiv.appendChild(card);
   });
+
+  // zabezpeč unikátne poradie v rámci skupiny
+  document.querySelectorAll(".team-select").forEach(sel => {
+    sel.addEventListener("change", () => {
+      enforceUniquePositions(sel.dataset.group);
+    });
+  });
 }
 
 createGroupUI();
 
+// --- Unikátne poradie v skupine (1–4 len raz) ---
+function enforceUniquePositions(groupName) {
+  const selects = Array.from(document.querySelectorAll(`select[data-group="${groupName}"]`));
+  const used = new Map();
+
+  selects.forEach(sel => {
+    const val = sel.value;
+    if (val === "") return;
+    if (used.has(val) && used.get(val) !== sel) {
+      // kolízia – zrušíme aktuálny výber
+      sel.value = "";
+    } else {
+      used.set(val, sel);
+    }
+  });
+}
+
 // --- Generovanie pavúka po kliknutí na tlačidlo ---
 document.getElementById("generate").addEventListener("click", () => {
+  errorEl.textContent = "";
+
   const selects = document.querySelectorAll(".team-select");
   const standings = {};
 
   selects.forEach(sel => {
     const g = sel.dataset.group;
     const t = sel.dataset.team;
-    const pos = parseInt(sel.value, 10);
+    const val = sel.value === "" ? null : parseInt(sel.value, 10);
     if (!standings[g]) standings[g] = [];
-    standings[g].push({ team: t, pos });
+    standings[g].push({ team: t, pos: val });
   });
 
+  // kontrola: každá skupina musí mať presne 1,2,3,4
+  for (const [g, arr] of Object.entries(standings)) {
+    const positions = arr.map(x => x.pos).sort((a, b) => (a ?? 0) - (b ?? 0));
+    const expected = [1, 2, 3, 4];
+    if (positions.some(p => p === null) || positions.length !== 4) {
+      errorEl.textContent = `Skupina ${g}: musíš nastaviť poradie 1.–4. bez prázdnych miest.`;
+      return;
+    }
+    for (let i = 0; i < 4; i++) {
+      if (positions[i] !== expected[i]) {
+        errorEl.textContent = `Skupina ${g}: každé miesto 1.–4. môže byť použité len raz.`;
+        return;
+      }
+    }
+  }
+
+  // zoradenie v skupinách
   Object.keys(standings).forEach(g => {
     standings[g].sort((a, b) => a.pos - b.pos);
   });
@@ -95,28 +144,43 @@ document.getElementById("generate").addEventListener("click", () => {
   thirds.sort((a, b) => a.group.localeCompare(b.group));
   const bestThirds = thirds.slice(0, 8);
 
-  const fTeams = firsts.map(x => x.team);
-  const sTeams = seconds.map(x => x.team);
-  const tTeams = bestThirds.map(x => x.team);
+  const fTeams = firsts.map(x => x.team);   // 12
+  const sTeams = seconds.map(x => x.team);  // 12
+  const tTeams = bestThirds.map(x => x.team); // 8
 
   const matches32 = [];
   let id = 1;
 
   // 1. miesta vs tretie (alebo druhé, ak tretie chýba)
+  const thirdPool = [...tTeams];
+  const secondPool = [...sTeams];
+
   for (let i = 0; i < fTeams.length; i++) {
-    const opp = tTeams[i] || sTeams[i];
+    let opp = null;
+    if (thirdPool.length > 0) {
+      opp = thirdPool.shift();
+    } else if (secondPool.length > 0) {
+      opp = secondPool.shift();
+    }
     matches32.push({ id: id++, home: fTeams[i], away: opp });
   }
 
   // zvyšné druhé medzi sebou
-  const usedSeconds = fTeams.length;
-  for (let i = usedSeconds; i < sTeams.length; i += 2) {
-    if (sTeams[i + 1]) {
-      matches32.push({ id: id++, home: sTeams[i], away: sTeams[i + 1] });
+  const restSeconds = [...secondPool];
+  for (let i = 0; i < restSeconds.length; i += 2) {
+    if (restSeconds[i + 1]) {
+      matches32.push({ id: id++, home: restSeconds[i], away: restSeconds[i + 1] });
     }
   }
 
+  // očakávame 16 zápasov
+  if (matches32.length !== 16) {
+    errorEl.textContent = `Chyba v generovaní 32-finále (zápasov je ${matches32.length}, malo by byť 16).`;
+    return;
+  }
+
   // vyčisti staré kolá
+  r32Div.innerHTML = "";
   r16Div.innerHTML = "";
   r8Div.innerHTML = "";
   r4Div.innerHTML = "";
