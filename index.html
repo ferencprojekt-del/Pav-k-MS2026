@@ -24,36 +24,35 @@
 <main>
   <section class="card">
     <h2>Skupinová fáza</h2>
-    <p class="subtitle">Nastav poradie v skupinách A – L. Potom prejdeme do play-off pavúka.</p>
+    <p class="subtitle">Nastav poradie v skupinách A – L. Potom prejdeme do play-off.</p>
     <div id="groups" class="groups-grid"></div>
     <button id="generate" class="primary-btn">Pokračovať na play-off</button>
   </section>
 
   <section class="card">
     <h2>Play-off pavúk</h2>
-    <p class="subtitle">Zatiaľ len automaticky vygenerované 32-finále podľa tvojich skupín.</p>
+    <p class="subtitle">Klikni na víťaza v každom zápase a pavúk sa bude dopĺňať.</p>
     <div class="bracket-wrapper">
       <div class="bracket-column">
         <h3>32-finále</h3>
         <div id="r32" class="match-column"></div>
       </div>
-      <div class="bracket-column disabled">
+      <div class="bracket-column">
         <h3>Osemfinále</h3>
-        <div class="match-column placeholder">
-          Pridáme neskôr – po kliknutí na víťazov 32-finále.
-        </div>
+        <div id="r16" class="match-column"></div>
       </div>
-      <div class="bracket-column disabled">
+      <div class="bracket-column">
         <h3>Štvrťfinále</h3>
-        <div class="match-column placeholder"></div>
+        <div id="r8" class="match-column"></div>
       </div>
-      <div class="bracket-column disabled">
+      <div class="bracket-column">
         <h3>Semifinále</h3>
-        <div class="match-column placeholder"></div>
+        <div id="r4" class="match-column"></div>
       </div>
-      <div class="bracket-column disabled">
+      <div class="bracket-column">
         <h3>Finále</h3>
-        <div class="match-column placeholder"></div>
+        <div id="r2" class="match-column"></div>
+        <div id="winner" class="winner-box"></div>
       </div>
     </div>
   </section>
