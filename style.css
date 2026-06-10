@@ -1,70 +1,330 @@
-<!DOCTYPE html>
-<html lang="sk">
-<head>
-  <meta charset="UTF-8">
-  <title>Pavúk MS 2026</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+:root {
+  --bg: #0b1020;
+  --card-bg: #151a2c;
+  --accent-pink: #ff3ea5;
+  --accent-blue: #3f8cff;
+  --accent-yellow: #ffd54a;
+  --text-main: #ffffff;
+  --text-muted: #b3b8d4;
+  --border-soft: #262b40;
+  --match-bg: #1d2236;
+  --error: #ff6b6b;
+}
 
-<header class="header">
-  <div class="header-left">
-    <div class="logo-ball">⚽</div>
-    <div class="header-text">
-      <h1>Pavúk MS vo futbale 2026</h1>
-      <p>Vyklikaj si svoj svetový šampiónsky pavúk</p>
-    </div>
-  </div>
-  <div class="header-right">
-    <span class="badge">Fanúšikovský mód</span>
-  </div>
-</header>
+* {
+  box-sizing: border-box;
+}
 
-<main>
-  <section class="card">
-    <h2>Skupinová fáza</h2>
-    <p class="subtitle">
-      Natipuj výsledky všetkých zápasov v skupinách A – L. Tabuľky sa prepočítavajú hneď, v štýle FIFA.
-    </p>
-    <div id="groups" class="groups-grid"></div>
-    <button id="generate" class="primary-btn">Pokračovať na play-off</button>
-    <p id="error" class="error-msg"></p>
-  </section>
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #1f2750 0, #050814 55%, #02030a 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+}
 
-  <section class="card">
-    <h2>Play-off pavúk</h2>
-    <p class="subtitle">Klikni na víťaza v každom zápase a pavúk sa bude dopĺňať až po finále.</p>
-    <div class="bracket-wrapper">
-      <div class="bracket-column">
-        <h3>32-finále</h3>
-        <div id="r32" class="match-column"></div>
-      </div>
-      <div class="bracket-column">
-        <h3>Osemfinále</h3>
-        <div id="r16" class="match-column"></div>
-      </div>
-      <div class="bracket-column">
-        <h3>Štvrťfinále</h3>
-        <div id="r8" class="match-column"></div>
-      </div>
-      <div class="bracket-column">
-        <h3>Semifinále</h3>
-        <div id="r4" class="match-column"></div>
-      </div>
-      <div class="bracket-column">
-        <h3>Finále</h3>
-        <div id="r2" class="match-column"></div>
-        <div id="winner" class="winner-box"></div>
-      </div>
-    </div>
-  </section>
-</main>
+header.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: linear-gradient(90deg, #ff3ea5, #ff7a5c, #ffd54a);
+  color: #fff;
+}
 
-<footer>
-  <p>Fanúšikovský pavúk MS 2026 • GitHub projekt</p>
-</footer>
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-<script src="script.js"></script>
-</body>
-</html>
+.logo-ball {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.header-text h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.header-text p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.header-right .badge {
+  background: rgba(0,0,0,0.25);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+main {
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.subtitle {
+  margin-top: 4px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.error-msg {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--error);
+}
+
+.groups-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px;
+}
+
+.group-card {
+  background: #1b2136;
+  border-radius: 10px;
+  padding: 8px;
+  border: 1px solid #262c45;
+}
+
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.group-header h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.group-tag {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(63,140,255,0.15);
+  color: #9bbcff;
+}
+
+/* --- SKUPINOVÉ ZÁPASY --- */
+
+.match-row {
+  display: grid;
+  grid-template-columns: 1fr 40px 10px 40px 1fr;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  border-bottom: 1px solid #262c45;
+  font-size: 12px;
+}
+
+.score-input {
+  width: 100%;
+  padding: 3px;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid #303754;
+  background: #111528;
+  color: var(--text-main);
+  font-size: 13px;
+}
+
+.score-input:focus {
+  outline: 2px solid var(--accent-blue);
+}
+
+/* --- TABUĽKA SKUPINY (FIFA štýl) --- */
+
+.group-table {
+  width: 100%;
+  margin-top: 8px;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.group-table th {
+  text-align: left;
+  padding: 4px;
+  color: var(--text-muted);
+  border-bottom: 1px solid #303754;
+  font-weight: 500;
+}
+
+.group-table td {
+  padding: 4px;
+  border-bottom: 1px solid #262c45;
+}
+
+.group-table .first {
+  background: rgba(255,255,255,0.04);
+}
+
+.group-table .second {
+  background: rgba(255,255,255,0.02);
+}
+
+.group-table .third {
+  background: rgba(0,0,0,0.15);
+}
+
+.group-table .fourth {
+  opacity: 0.6;
+}
+
+/* --- VLAJKY --- */
+
+.flag {
+  width: 18px;
+  height: 12px;
+  border-radius: 2px;
+  margin-right: 6px;
+  object-fit: cover;
+  border: 1px solid #0004;
+}
+
+.team-with-flag {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* --- ANIMÁCIA ZMENY PORADIA --- */
+
+@keyframes highlight {
+  0% { background-color: rgba(255,255,255,0.0); }
+  50% { background-color: rgba(255,255,255,0.12); }
+  100% { background-color: rgba(255,255,255,0.0); }
+}
+
+.row-animated {
+  animation: highlight 0.6s ease-out;
+}
+
+/* --- PLAY-OFF --- */
+
+.primary-btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 999px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  background: linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.primary-btn:hover {
+  filter: brightness(1.05);
+}
+
+.bracket-wrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding-bottom: 6px;
+}
+
+.bracket-column {
+  min-width: 180px;
+}
+
+.bracket-column h3 {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+
+.match-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.match-card {
+  background: var(--match-bg);
+  border-radius: 10px;
+  padding: 6px;
+  border: 1px solid #262c45;
+  font-size: 12px;
+}
+
+.match-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.team-btn {
+  width: 100%;
+  margin: 3px 0;
+  padding: 6px;
+  border-radius: 6px;
+  border: none;
+  background: #222a45;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  text-align: left;
+}
+
+.team-btn:hover {
+  background: #3f8cff;
+}
+
+.team-btn.winner {
+  background: #3f8cff;
+}
+
+.team-btn.loser {
+  opacity: 0.4;
+}
+
+.winner-box {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  background: #1d2236;
+  border: 1px solid var(--accent-yellow);
+  font-size: 13px;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
