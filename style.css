@@ -1,91 +1,70 @@
-/* --- SKUPINOVÉ ZÁPASY --- */
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <title>Pavúk MS 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-.match-row {
-  display: grid;
-  grid-template-columns: 1fr 40px 10px 40px 1fr;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 0;
-  border-bottom: 1px solid #262c45;
-}
+<header class="header">
+  <div class="header-left">
+    <div class="logo-ball">⚽</div>
+    <div class="header-text">
+      <h1>Pavúk MS vo futbale 2026</h1>
+      <p>Vyklikaj si svoj svetový šampiónsky pavúk</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="badge">Fanúšikovský mód</span>
+  </div>
+</header>
 
-.score-input {
-  width: 100%;
-  padding: 4px;
-  text-align: center;
-  border-radius: 6px;
-  border: 1px solid #303754;
-  background: #111528;
-  color: var(--text-main);
-  font-size: 14px;
-}
+<main>
+  <section class="card">
+    <h2>Skupinová fáza</h2>
+    <p class="subtitle">
+      Natipuj výsledky všetkých zápasov v skupinách A – L. Tabuľky sa prepočítavajú hneď, v štýle FIFA.
+    </p>
+    <div id="groups" class="groups-grid"></div>
+    <button id="generate" class="primary-btn">Pokračovať na play-off</button>
+    <p id="error" class="error-msg"></p>
+  </section>
 
-.score-input:focus {
-  outline: 2px solid var(--accent-blue);
-}
+  <section class="card">
+    <h2>Play-off pavúk</h2>
+    <p class="subtitle">Klikni na víťaza v každom zápase a pavúk sa bude dopĺňať až po finále.</p>
+    <div class="bracket-wrapper">
+      <div class="bracket-column">
+        <h3>32-finále</h3>
+        <div id="r32" class="match-column"></div>
+      </div>
+      <div class="bracket-column">
+        <h3>Osemfinále</h3>
+        <div id="r16" class="match-column"></div>
+      </div>
+      <div class="bracket-column">
+        <h3>Štvrťfinále</h3>
+        <div id="r8" class="match-column"></div>
+      </div>
+      <div class="bracket-column">
+        <h3>Semifinále</h3>
+        <div id="r4" class="match-column"></div>
+      </div>
+      <div class="bracket-column">
+        <h3>Finále</h3>
+        <div id="r2" class="match-column"></div>
+        <div id="winner" class="winner-box"></div>
+      </div>
+    </div>
+  </section>
+</main>
 
-/* --- TABUĽKA SKUPINY --- */
+<footer>
+  <p>Fanúšikovský pavúk MS 2026 • GitHub projekt</p>
+</footer>
 
-.group-table {
-  width: 100%;
-  margin-top: 10px;
-  border-collapse: collapse;
-  font-size: 13px;
-}
-
-.group-table th {
-  text-align: left;
-  padding: 4px;
-  color: var(--accent-yellow);
-  border-bottom: 1px solid #303754;
-}
-
-.group-table td {
-  padding: 4px;
-  border-bottom: 1px solid #262c45;
-}
-
-.group-table .first {
-  background: rgba(63, 140, 255, 0.15);
-}
-
-.group-table .second {
-  background: rgba(255, 62, 165, 0.15);
-}
-
-.group-table .third {
-  background: rgba(255, 212, 74, 0.15);
-}
-
-.group-table .fourth {
-  opacity: 0.6;
-}
-
-/* --- VLAJKY --- */
-
-.flag {
-  width: 22px;
-  height: 16px;
-  border-radius: 2px;
-  margin-right: 6px;
-  object-fit: cover;
-  border: 1px solid #0004;
-}
-
-.team-with-flag {
-  display: flex;
-  align-items: center;
-}
-
-/* --- ANIMÁCIE --- */
-
-@keyframes highlight {
-  0% { background-color: rgba(255,255,255,0.0); }
-  50% { background-color: rgba(255,255,255,0.15); }
-  100% { background-color: rgba(255,255,255,0.0); }
-}
-
-.row-animated {
-  animation: highlight 0.8s ease-out;
-}
-
+<script src="script.js"></script>
+</body>
+</html>
