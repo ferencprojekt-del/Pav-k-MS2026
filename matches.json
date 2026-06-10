@@ -1,16 +1,61 @@
 [
-  {
-    "id": 1,
-    "stage": "Skupina A",
-    "home": "Nemecko",
-    "away": "Brazília",
-    "date": "2026-06-12T18:00:00"
-  },
-  {
-    "id": 2,
-    "stage": "Skupina A",
-    "home": "Slovensko",
-    "away": "Španielsko",
-    "date": "2026-06-13T21:00:00"
-  }
+  { "id": 1, "group": "A", "home": { "team": "USA", "flag": "https://flagcdn.com/us.svg" }, "away": { "team": "Kanada", "flag": "https://flagcdn.com/ca.svg" } },
+  { "id": 2, "group": "A", "home": { "team": "Mexiko", "flag": "https://flagcdn.com/mx.svg" }, "away": { "team": "Nový Zéland", "flag": "https://flagcdn.com/nz.svg" } },
+  { "id": 3, "group": "A", "home": { "team": "USA", "flag": "https://flagcdn.com/us.svg" }, "away": { "team": "Mexiko", "flag": "https://flagcdn.com/mx.svg" } },
+  { "id": 4, "group": "A", "home": { "team": "Kanada", "flag": "https://flagcdn.com/ca.svg" }, "away": { "team": "Nový Zéland", "flag": "https://flagcdn.com/nz.svg" } },
+
+  { "id": 5, "group": "B", "home": { "team": "Argentína", "flag": "https://flagcdn.com/ar.svg" }, "away": { "team": "Nigéria", "flag": "https://flagcdn.com/ng.svg" } },
+  { "id": 6, "group": "B", "home": { "team": "Holandsko", "flag": "https://flagcdn.com/nl.svg" }, "away": { "team": "Irán", "flag": "https://flagcdn.com/ir.svg" } },
+  { "id": 7, "group": "B", "home": { "team": "Argentína", "flag": "https://flagcdn.com/ar.svg" }, "away": { "team": "Holandsko", "flag": "https://flagcdn.com/nl.svg" } },
+  { "id": 8, "group": "B", "home": { "team": "Nigéria", "flag": "https://flagcdn.com/ng.svg" }, "away": { "team": "Irán", "flag": "https://flagcdn.com/ir.svg" } },
+
+  { "id": 9, "group": "C", "home": { "team": "Francúzsko", "flag": "https://flagcdn.com/fr.svg" }, "away": { "team": "Japonsko", "flag": "https://flagcdn.com/jp.svg" } },
+  { "id": 10, "group": "C", "home": { "team": "Chorvátsko", "flag": "https://flagcdn.com/hr.svg" }, "away": { "team": "Ekvádor", "flag": "https://flagcdn.com/ec.svg" } },
+  { "id": 11, "group": "C", "home": { "team": "Francúzsko", "flag": "https://flagcdn.com/fr.svg" }, "away": { "team": "Chorvátsko", "flag": "https://flagcdn.com/hr.svg" } },
+  { "id": 12, "group": "C", "home": { "team": "Japonsko", "flag": "https://flagcdn.com/jp.svg" }, "away": { "team": "Ekvádor", "flag": "https://flagcdn.com/ec.svg" } },
+
+  { "id": 13, "group": "D", "home": { "team": "Brazília", "flag": "https://flagcdn.com/br.svg" }, "away": { "team": "Škótsko", "flag": "https://flagcdn.com/gb-sct.svg" } },
+  { "id": 14, "group": "D", "home": { "team": "Kolumbia", "flag": "https://flagcdn.com/co.svg" }, "away": { "team": "Južná Kórea", "flag": "https://flagcdn.com/kr.svg" } },
+  { "id": 15, "group": "D", "home": { "team": "Brazília", "flag": "https://flagcdn.com/br.svg" }, "away": { "team": "Kolumbia", "flag": "https://flagcdn.com/co.svg" } },
+  { "id": 16, "group": "D", "home": { "team": "Škótsko", "flag": "https://flagcdn.com/gb-sct.svg" }, "away": { "team": "Južná Kórea", "flag": "https://flagcdn.com/kr.svg" } },
+
+  { "id": 17, "group": "E", "home": { "team": "Španielsko", "flag": "https://flagcdn.com/es.svg" }, "away": { "team": "USA", "flag": "https://flagcdn.com/us.svg" } },
+  { "id": 18, "group": "E", "home": { "team": "Nórsko", "flag": "https://flagcdn.com/no.svg" }, "away": { "team": "Jordánsko", "flag": "https://flagcdn.com/jo.svg" } },
+  { "id": 19, "group": "E", "home": { "team": "Španielsko", "flag": "https://flagcdn.com/es.svg" }, "away": { "team": "Nórsko", "flag": "https://flagcdn.com/no.svg" } },
+  { "id": 20, "group": "E", "home": { "team": "USA", "flag": "https://flagcdn.com/us.svg" }, "away": { "team": "Jordánsko", "flag": "https://flagcdn.com/jo.svg" } },
+
+  { "id": 21, "group": "F", "home": { "team": "Anglicko", "flag": "https://flagcdn.com/gb-eng.svg" }, "away": { "team": "Uruguaj", "flag": "https://flagcdn.com/uy.svg" } },
+  { "id": 22, "group": "F", "home": { "team": "Čile", "flag": "https://flagcdn.com/cl.svg" }, "away": { "team": "Japonsko", "flag": "https://flagcdn.com/jp.svg" } },
+  { "id": 23, "group": "F", "home": { "team": "Anglicko", "flag": "https://flagcdn.com/gb-eng.svg" }, "away": { "team": "Čile", "flag": "https://flagcdn.com/cl.svg" } },
+  { "id": 24, "group": "F", "home": { "team": "Uruguaj", "flag": "https://flagcdn.com/uy.svg" }, "away": { "team": "Japonsko", "flag": "https://flagcdn.com/jp.svg" } },
+
+  { "id": 25, "group": "G", "home": { "team": "Nemecko", "flag": "https://flagcdn.com/de.svg" }, "away": { "team": "Slovensko", "flag": "https://flagcdn.com/sk.svg" } },
+  { "id": 26, "group": "G", "home": { "team": "Švajčiarsko", "flag": "https://flagcdn.com/ch.svg" }, "away": { "team": "Kamerun", "flag": "https://flagcdn.com/cm.svg" } },
+  { "id": 27, "group": "G", "home": { "team": "Nemecko", "flag": "https://flagcdn.com/de.svg" }, "away": { "team": "Švajčiarsko", "flag": "https://flagcdn.com/ch.svg" } },
+  { "id": 28, "group": "G", "home": { "team": "Slovensko", "flag": "https://flagcdn.com/sk.svg" }, "away": { "team": "Kamerun", "flag": "https://flagcdn.com/cm.svg" } },
+
+  { "id": 29, "group": "H", "home": { "team": "Taliansko", "flag": "https://flagcdn.com/it.svg" }, "away": { "team": "Egypt", "flag": "https://flagcdn.com/eg.svg" } },
+  { "id": 30, "group": "H", "home": { "team": "Portugalsko", "flag": "https://flagcdn.com/pt.svg" }, "away": { "team": "USA", "flag": "https://flagcdn.com/us.svg" } },
+  { "id": 31, "group": "H", "home": { "team": "Taliansko", "flag": "https://flagcdn.com/it.svg" }, "away": { "team": "Portugalsko", "flag": "https://flagcdn.com/pt.svg" } },
+  { "id": 32, "group": "H", "home": { "team": "Egypt", "flag": "https://flagcdn.com/eg.svg" }, "away": { "team": "USA", "flag": "https://flagcdn.com/us.svg" } },
+
+  { "id": 33, "group": "I", "home": { "team": "Belgicko", "flag": "https://flagcdn.com/be.svg" }, "away": { "team": "Maroko", "flag": "https://flagcdn.com/ma.svg" } },
+  { "id": 34, "group": "I", "home": { "team": "Srbsko", "flag": "https://flagcdn.com/rs.svg" }, "away": { "team": "USA", "flag": "https://flagcdn.com/us.svg" } },
+  { "id": 35, "group": "I", "home": { "team": "Belgicko", "flag": "https://flagcdn.com/be.svg" }, "away": { "team": "Srbsko", "flag": "https://flagcdn.com/rs.svg" } },
+  { "id": 36, "group": "I", "home": { "team": "Maroko", "flag": "https://flagcdn.com/ma.svg" }, "away": { "team": "USA", "flag": "https://flagcdn.com/us.svg" } },
+
+  { "id": 37, "group": "J", "home": { "team": "Dánsko", "flag": "https://flagcdn.com/dk.svg" }, "away": { "team": "Tunisko", "flag": "https://flagcdn.com/tn.svg" } },
+  { "id": 38, "group": "J", "home": { "team": "Mexiko", "flag": "https://flagcdn.com/mx.svg" }, "away": { "team": "Austrália", "flag": "https://flagcdn.com/au.svg" } },
+  { "id": 39, "group": "J", "home": { "team": "Dánsko", "flag": "https://flagcdn.com/dk.svg" }, "away": { "team": "Mexiko", "flag": "https://flagcdn.com/mx.svg" } },
+  { "id": 40, "group": "J", "home": { "team": "Tunisko", "flag": "https://flagcdn.com/tn.svg" }, "away": { "team": "Austrália", "flag": "https://flagcdn.com/au.svg" } },
+
+  { "id": 41, "group": "K", "home": { "team": "Turecko", "flag": "https://flagcdn.com/tr.svg" }, "away": { "team": "USA", "flag": "https://flagcdn.com/us.svg" } },
+  { "id": 42, "group": "K", "home": { "team": "Peru", "flag": "https://flagcdn.com/pe.svg" }, "away": { "team": "Ghana", "flag": "https://flagcdn.com/gh.svg" } },
+  { "id": 43, "group": "K", "home": { "team": "Turecko", "flag": "https://flagcdn.com/tr.svg" }, "away": { "team": "Peru", "flag": "https://flagcdn.com/pe.svg" } },
+  { "id": 44, "group": "K", "home": { "team": "USA", "flag": "https://flagcdn.com/us.svg" }, "away": { "team": "Ghana", "flag": "https://flagcdn.com/gh.svg" } },
+
+  { "id": 45, "group": "L", "home": { "team": "Švédsko", "flag": "https://flagcdn.com/se.svg" }, "away": { "team": "Česko", "flag": "https://flagcdn.com/cz.svg" } },
+  { "id": 46, "group": "L", "home": { "team": "Paraguaj", "flag": "https://flagcdn.com/py.svg" }, "away": { "team": "Kostarika", "flag": "https://flagcdn.com/cr.svg" } },
+  { "id": 47, "group": "L", "home": { "team": "Švédsko", "flag": "https://flagcdn.com/se.svg" }, "away": { "team": "Paraguaj", "flag": "https://flagcdn.com/py.svg" } },
+  { "id": 48, "group": "L", "home": { "team": "Česko", "flag": "https://flagcdn.com/cz.svg" }, "away": { "team": "Kostarika", "flag": "https://flagcdn.com/cr.svg" } }
 ]
