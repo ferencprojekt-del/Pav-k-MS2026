@@ -2,28 +2,67 @@
 <html lang="sk">
 <head>
   <meta charset="UTF-8">
-  <title>Tipovačka MS 2026</title>
+  <title>Pavúk MS 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Tipovačka MS 2026 – Skupiny</h1>
-  <div id="matches"></div>
 
-  <script src="script.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="sk">
-<head>
-  <meta charset="UTF-8">
-  <title>Tipovačka MS 2026</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Tipovačka MS 2026</h1>
-  <div id="matches"></div>
-  <button id="save">Uložiť tipy</button>
+<header class="header">
+  <div class="header-left">
+    <div class="logo-ball">⚽</div>
+    <div class="header-text">
+      <h1>Pavúk MS vo futbale 2026</h1>
+      <p>Vyklikaj si svoj svetový šampiónsky pavúk</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="badge">Fanúšikovský mód</span>
+  </div>
+</header>
 
-  <script src="script.js"></script>
+<main>
+  <section class="card">
+    <h2>Skupinová fáza</h2>
+    <p class="subtitle">Nastav poradie v skupinách A – L. Potom prejdeme do play-off pavúka.</p>
+    <div id="groups" class="groups-grid"></div>
+    <button id="generate" class="primary-btn">Pokračovať na play-off</button>
+  </section>
+
+  <section class="card">
+    <h2>Play-off pavúk</h2>
+    <p class="subtitle">Zatiaľ len automaticky vygenerované 32-finále podľa tvojich skupín.</p>
+    <div class="bracket-wrapper">
+      <div class="bracket-column">
+        <h3>32-finále</h3>
+        <div id="r32" class="match-column"></div>
+      </div>
+      <div class="bracket-column disabled">
+        <h3>Osemfinále</h3>
+        <div class="match-column placeholder">
+          Pridáme neskôr – po kliknutí na víťazov 32-finále.
+        </div>
+      </div>
+      <div class="bracket-column disabled">
+        <h3>Štvrťfinále</h3>
+        <div class="match-column placeholder"></div>
+      </div>
+      <div class="bracket-column disabled">
+        <h3>Semifinále</h3>
+        <div class="match-column placeholder"></div>
+      </div>
+      <div class="bracket-column disabled">
+        <h3>Finále</h3>
+        <div class="match-column placeholder"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Fanúšikovský pavúk MS 2026 • GitHub projekt</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
