@@ -1,258 +1,91 @@
-:root {
-  --bg: #0b1020;
-  --card-bg: #151a2c;
-  --accent-pink: #ff3ea5;
-  --accent-blue: #3f8cff;
-  --accent-yellow: #ffd54a;
-  --text-main: #ffffff;
-  --text-muted: #b3b8d4;
-  --border-soft: #262b40;
-  --match-bg: #1d2236;
-  --error: #ff6b6b;
-}
+/* --- SKUPINOVÉ ZÁPASY --- */
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top, #1f2750 0, #050814 55%, #02030a 100%);
-  color: var(--text-main);
-  min-height: 100vh;
-}
-
-header.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 16px;
-  background: linear-gradient(90deg, #ff3ea5, #ff7a5c, #ffd54a);
-  color: #fff;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo-ball {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-}
-
-.header-text h1 {
-  margin: 0;
-  font-size: 18px;
-}
-
-.header-text p {
-  margin: 0;
-  font-size: 12px;
-  opacity: 0.9;
-}
-
-.header-right .badge {
-  background: rgba(0,0,0,0.25);
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-main {
-  padding: 16px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.card {
-  background: var(--card-bg);
-  border-radius: 14px;
-  padding: 14px;
-  margin-bottom: 16px;
-  border: 1px solid var(--border-soft);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-}
-
-.card h2 {
-  margin-top: 0;
-  font-size: 18px;
-}
-
-.subtitle {
-  margin-top: 4px;
-  margin-bottom: 12px;
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-.error-msg {
-  margin-top: 8px;
-  font-size: 13px;
-  color: var(--error);
-}
-
-.groups-grid {
+.match-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 10px;
-}
-
-.group-card {
-  background: #1b2136;
-  border-radius: 10px;
-  padding: 8px;
-  border: 1px solid #262c45;
-}
-
-.group-header {
-  display: flex;
-  justify-content: space-between;
+  grid-template-columns: 1fr 40px 10px 40px 1fr;
   align-items: center;
-  margin-bottom: 6px;
+  gap: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid #262c45;
 }
 
-.group-header h3 {
-  margin: 0;
-  font-size: 14px;
-}
-
-.group-tag {
-  font-size: 11px;
-  padding: 2px 6px;
-  border-radius: 999px;
-  background: rgba(63,140,255,0.15);
-  color: #9bbcff;
-}
-
-.team-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 4px 0;
-  font-size: 13px;
-}
-
-.team-name {
-  flex: 1;
-  padding-right: 6px;
-}
-
-.team-select {
-  width: 90px;
-  padding: 2px 4px;
-  font-size: 12px;
+.score-input {
+  width: 100%;
+  padding: 4px;
+  text-align: center;
   border-radius: 6px;
   border: 1px solid #303754;
   background: #111528;
   color: var(--text-main);
-}
-
-.primary-btn {
-  margin-top: 12px;
-  width: 100%;
-  padding: 10px;
-  border-radius: 999px;
-  border: none;
-  font-size: 15px;
-  font-weight: 600;
-  background: linear-gradient(90deg, var(--accent-pink), var(--accent-blue));
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-}
-
-.primary-btn:hover {
-  filter: brightness(1.05);
-}
-
-.bracket-wrapper {
-  display: flex;
-  overflow-x: auto;
-  gap: 10px;
-  padding-bottom: 6px;
-}
-
-.bracket-column {
-  min-width: 180px;
-}
-
-.bracket-column h3 {
   font-size: 14px;
-  margin-top: 0;
-  margin-bottom: 6px;
 }
 
-.match-column {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.score-input:focus {
+  outline: 2px solid var(--accent-blue);
 }
 
-.match-card {
-  background: var(--match-bg);
-  border-radius: 10px;
-  padding: 6px;
-  border: 1px solid #262c45;
-  font-size: 12px;
-}
+/* --- TABUĽKA SKUPINY --- */
 
-.match-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 4px;
-  color: var(--text-muted);
-  font-size: 11px;
-}
-
-.team-btn {
+.group-table {
   width: 100%;
-  margin: 3px 0;
-  padding: 6px;
-  border-radius: 6px;
-  border: none;
-  background: #222a45;
-  color: #fff;
-  cursor: pointer;
-  font-size: 13px;
-  text-align: left;
-}
-
-.team-btn:hover {
-  background: #3f8cff;
-}
-
-.team-btn.winner {
-  background: #3f8cff;
-}
-
-.team-btn.loser {
-  opacity: 0.4;
-}
-
-.winner-box {
   margin-top: 10px;
-  padding: 8px;
-  border-radius: 10px;
-  background: #1d2236;
-  border: 1px solid var(--accent-yellow);
+  border-collapse: collapse;
   font-size: 13px;
-  text-align: center;
 }
 
-footer {
-  text-align: center;
-  padding: 10px;
-  font-size: 11px;
-  color: var(--text-muted);
+.group-table th {
+  text-align: left;
+  padding: 4px;
+  color: var(--accent-yellow);
+  border-bottom: 1px solid #303754;
 }
+
+.group-table td {
+  padding: 4px;
+  border-bottom: 1px solid #262c45;
+}
+
+.group-table .first {
+  background: rgba(63, 140, 255, 0.15);
+}
+
+.group-table .second {
+  background: rgba(255, 62, 165, 0.15);
+}
+
+.group-table .third {
+  background: rgba(255, 212, 74, 0.15);
+}
+
+.group-table .fourth {
+  opacity: 0.6;
+}
+
+/* --- VLAJKY --- */
+
+.flag {
+  width: 22px;
+  height: 16px;
+  border-radius: 2px;
+  margin-right: 6px;
+  object-fit: cover;
+  border: 1px solid #0004;
+}
+
+.team-with-flag {
+  display: flex;
+  align-items: center;
+}
+
+/* --- ANIMÁCIE --- */
+
+@keyframes highlight {
+  0% { background-color: rgba(255,255,255,0.0); }
+  50% { background-color: rgba(255,255,255,0.15); }
+  100% { background-color: rgba(255,255,255,0.0); }
+}
+
+.row-animated {
+  animation: highlight 0.8s ease-out;
+}
+
