@@ -1,1 +1,1 @@
-# Pav-k-MS2026
+# Pavuk-MS2026
